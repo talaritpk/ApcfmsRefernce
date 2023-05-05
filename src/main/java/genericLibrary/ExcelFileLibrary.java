@@ -1,4 +1,4 @@
-package com.GenericLibrary;
+package genericLibrary;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;

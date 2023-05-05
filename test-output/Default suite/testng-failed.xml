@@ -6,9 +6,9 @@
       <class name="referenceApcfms.test1">
         <methods>
           <include name="amConfig"/>
-          <include name="bsConfig"/>
-          <include name="assSuite"/>
           <include name="bcConfig"/>
+          <include name="asSuite"/>
+          <include name="bsConfig"/>
           <include name="bConfiig"/>
           <include name="acConfig"/>
           <include name="appcffms"/>

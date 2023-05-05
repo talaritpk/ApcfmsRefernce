@@ -1,9 +1,12 @@
-package com.GenericLibrary;
+package genericLibrary;
 
 import java.io.IOException;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.edge.EdgeOptions;
 import org.testng.Reporter;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
@@ -11,13 +14,16 @@ import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.Parameters;
+
+import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class BaseClass {
 	public ExcelFileLibrary excelFileLibrary=new ExcelFileLibrary();
 	public JavaLibrary javaLibrary=new JavaLibrary();
 	public PropertiesFileLibrary propertyFileLibrary=new PropertiesFileLibrary();
 	public WebDriverLibrary  webDriverLibrary=new WebDriverLibrary();
-	public WebDriver driver;
+	public WebDriver driver=null;
 	public static  WebDriver sDriver;
 	
 	@BeforeSuite
@@ -26,20 +32,25 @@ public class BaseClass {
 		
 	}
 	
-	
+	//@Parameters("browser")
 	@BeforeClass
-	public void bcConfig() throws IOException
+	public void bcConfig(/*String BROWSER*/) throws IOException
 	{
-		String BROWSER=propertyFileLibrary.readDatafromPropertyFile("browser");
+		String BROWSER=propertyFileLibrary.readDatafromPropertyFile("browser");//
 		String URL=propertyFileLibrary.readDatafromPropertyFile("url");
 		if(BROWSER.equalsIgnoreCase("chrome"))
 		{
-			driver=new ChromeDriver();
+			ChromeOptions chomeOptions=new ChromeOptions();
+			chomeOptions.addArguments("--remote-allow-origins=*");
+			WebDriverManager.chromedriver().setup();
+			driver=new ChromeDriver(chomeOptions);
 			Reporter.log(BROWSER+" browser launched Successfuly",true);
 		}
 		else if(BROWSER.equalsIgnoreCase("edge"))
 		{
-			driver=new EdgeDriver();
+			EdgeOptions edgeOptions=new EdgeOptions();
+			edgeOptions.addArguments("--remote-allow-origins=*");
+			driver=new EdgeDriver(edgeOptions);
 			Reporter.log(BROWSER+" browser launched Successfuly",true);
 		}
 		else {Reporter.log("Invaid Browser",true);}
@@ -69,7 +80,7 @@ public class BaseClass {
 	}
 	
 	@AfterSuite
-	public void assSuite()
+	public void asSuite()
 	{
 		
 	}

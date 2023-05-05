@@ -1,4 +1,4 @@
-package com.GenericLibrary;
+package genericLibrary;
 
 import java.awt.AWTException;
 import java.awt.Robot;
@@ -25,7 +25,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
  * @author T Pavan Kumar
  *
  */
-public class WebDriverLibrary {
+	public class WebDriverLibrary {
 
 	/**
 	 * This method is used to maximize the window
@@ -298,7 +298,7 @@ public class WebDriverLibrary {
 	 */
 	public String takeScreensot(WebDriver driver, String screeenshotName) throws IOException {
 		File source = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-		File destination = new File(".\\target\\ScreenShots\\" + screeenshotName + ".png");
+		File destination = new File(".\\target\\Screenshots\\" + screeenshotName + ".png");
 		FileUtils.copyFile(source, destination);
 		return destination.getAbsolutePath();
 	}
@@ -311,6 +311,17 @@ public class WebDriverLibrary {
 	 */
 	public void scrollTillElement(WebDriver driver, WebElement element) {
 		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView();", element);
+	}
+	
+	
+	/**
+	 * This method will scroll down for 500 units
+	 * @param driver
+	 */
+	public void scrollAction(WebDriver driver)
+	{
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeScript("window.scrollBy(0,600)", "");
 	}
 
 }

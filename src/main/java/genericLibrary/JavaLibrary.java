@@ -1,4 +1,4 @@
-package com.GenericLibrary;
+package genericLibrary;
 
 import java.util.Date;
 import java.util.Random;
@@ -34,7 +34,7 @@ public class JavaLibrary {
 	 * This method is used to get system date in format.
 	 * @return
 	 */
-	public String getSystemDateIFormat()
+	public String getSystemDateInFormat()
 	{
 		Date d=new Date();
 		String split[]=d.toString().split(" ");
@@ -42,7 +42,7 @@ public class JavaLibrary {
 		String date=split[2];
 		String year=split[5];
 		String day=split[0];
-		String time=split[3];
+		String time=split[3].replace(":","-");
 		String dateInFormat=date+"-"+month+"-"+year+"_"+time+"_"+day;
 		return dateInFormat;
 	}

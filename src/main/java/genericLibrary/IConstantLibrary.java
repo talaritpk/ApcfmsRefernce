@@ -1,4 +1,4 @@
-package com.GenericLibrary;
+package genericLibrary;
 
 public interface IConstantLibrary {
 	String excelFilePath=".\\src\\test\\resources\\HT DETAILS (2).xls";
