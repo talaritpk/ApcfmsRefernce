@@ -14,7 +14,7 @@ import genericLibrary.BaseClass;
 public class test1 extends BaseClass {
 	
 	@Test(groups="smokeSuite")
-	public void appcffms() throws InterruptedException
+	public void apcfss() throws InterruptedException
 	{
 		OTPRpage page=new OTPRpage(driver);
 		page.enterOTPRDetailsandSubmit(driver);

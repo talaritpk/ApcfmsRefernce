@@ -6,12 +6,12 @@
       <class name="referenceApcfms.test1">
         <methods>
           <include name="amConfig"/>
+          <include name="apcfss"/>
           <include name="bcConfig"/>
           <include name="asSuite"/>
           <include name="bsConfig"/>
           <include name="bConfiig"/>
           <include name="acConfig"/>
-          <include name="appcffms"/>
         </methods>
       </class> <!-- referenceApcfms.test1 -->
     </classes>

@@ -9,7 +9,6 @@
 	<parameter name="browser" value="chrome"></parameter>
 		<classes>
 			<class name="referenceApcfms.test1" />
-			<class name="referenceApcfms.test2"/>
 		</classes>
 	</test> <!-- Test -->
 	
@@ -17,7 +16,6 @@
 	<parameter name="browser" value="edge"></parameter>
 		<classes>
 			<class name="referenceApcfms.test1"/>
-			<class name="referenceApcfms.test2"/>
 		</classes>
 	</test> <!-- Test -->
 </suite> <!-- Suite -->

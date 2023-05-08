@@ -13,7 +13,8 @@ import org.apache.poi.ss.usermodel.WorkbookFactory;
 
 /**
  * This class consists of generic methods to read and write data into excel
- *  @author T Pavan Kumar
+ * 
+ * @author T Pavan Kumar
  *
  */
 public class ExcelFileLibrary {
@@ -67,6 +68,7 @@ public class ExcelFileLibrary {
 
 	/**
 	 * This method is used to read all data present in the specified excel sheet.
+	 * 
 	 * @param sheetName
 	 * @return
 	 * @throws EncryptedDocumentException
@@ -81,26 +83,26 @@ public class ExcelFileLibrary {
 		Object[][] data = new Object[lastRowNumber][lastCellNumer];
 		for (int i = 0; i < lastRowNumber; i++) {
 			for (int j = 0; j < lastCellNumer; j++) {
-				data[i][j]=sheet.getRow(i+1).getCell(j).getStringCellValue();
+				data[i][j] = sheet.getRow(i + 1).getCell(j).getStringCellValue();
 			}
 		}
 		return data;
 	}
-	
+
 	/**
 	 * This method will provide the last row number utilized in a given sheet
+	 * 
 	 * @param sheetName
 	 * @param rowNumber
 	 * @return
 	 * @throws EncryptedDocumentException
 	 * @throws IOException
 	 */
-	public int getRowConunt(String sheetName) throws EncryptedDocumentException, IOException
-	{
+	public int getRowConunt(String sheetName) throws EncryptedDocumentException, IOException {
 		FileInputStream fileInputStream = new FileInputStream(IConstantLibrary.excelFilePath);
 		Workbook workBook = WorkbookFactory.create(fileInputStream);
 		Sheet sheet = workBook.getSheet(sheetName);
-		int rowCoun=sheet.getLastRowNum();
+		int rowCoun = sheet.getLastRowNum();
 		workBook.close();
 		return rowCoun;
 	}

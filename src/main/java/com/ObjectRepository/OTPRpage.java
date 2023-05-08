@@ -511,7 +511,7 @@ public class OTPRpage {
 		wl.handleDropdown(examCentre3DD, 3);
 	wl.scrollAction(driver);
 	Thread.sleep(1000);
-	
+	Assert.fail();
 		updateOtprBtn.click();
 	}
 	
