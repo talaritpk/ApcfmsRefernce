@@ -1,6 +1,6 @@
 package referenceApcfms;
 
-import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.Listeners;
@@ -19,7 +19,11 @@ public class test1 extends BaseClass {
 		OTPRpage page=new OTPRpage(driver);
 		page.enterOTPRDetailsandSubmit(driver);
 //		webDriverLibrary.mouseHoverOn(driver, page.getDateOfBirhCalender());
-//		page.getDateOfBirhCalender().click();
+		//page.getDateOfBirhCalender().click();
+//		JavascriptExecutor jse = (JavascriptExecutor)driver;
+//		String js="arguments[0].setAttribute('value','19-04-1996')";
+//		jse.executeScript(js,page.getDateOfBirhCalender());
+		
 //		page.selectDobInCalendar("29", "Feb", "2000", driver);
 		
 	}

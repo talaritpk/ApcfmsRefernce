@@ -9,6 +9,8 @@ import java.time.Duration;
 import java.util.Iterator;
 import java.util.Set;
 
+import javax.imageio.ImageIO;
+
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.OutputType;
@@ -20,12 +22,17 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import ru.yandex.qatools.ashot.AShot;
+import ru.yandex.qatools.ashot.Screenshot;
+import ru.yandex.qatools.ashot.coordinates.WebDriverCoordsProvider;
+
 /**
  * This class contains generic methods related to web driver actions
+ * 
  * @author T Pavan Kumar
  *
  */
-	public class WebDriverLibrary {
+public class WebDriverLibrary {
 
 	/**
 	 * This method is used to maximize the window
@@ -278,12 +285,30 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 	 * @param driver
 	 * @param partialWindowTitle
 	 */
-	public void switchToWindow(WebDriver driver, String partialWindowTitle) {
+	public void switchToWindowBasedOnTitle(WebDriver driver, String partialWindowTitle) {
 		Set<String> windowIds = driver.getWindowHandles();
 		Iterator<String> iterator = windowIds.iterator();
 		while (iterator.hasNext()) {
 			String windowId = iterator.next();
 			String currentwindowTitle = driver.switchTo().window(windowId).getTitle();
+			if (currentwindowTitle.contains(partialWindowTitle))
+				break;
+		}
+	}
+
+	/**
+	 * This method will switch from parent window to any child window or from any
+	 * child window to parent window based on the partial url text.
+	 * 
+	 * @param driver
+	 * @param partialWindowTitle
+	 */
+	public void switchToWindowBasedOnUrl(WebDriver driver, String partialWindowTitle) {
+		Set<String> windowIds = driver.getWindowHandles();
+		Iterator<String> iterator = windowIds.iterator();
+		while (iterator.hasNext()) {
+			String windowId = iterator.next();
+			String currentwindowTitle = driver.switchTo().window(windowId).getCurrentUrl();
 			if (currentwindowTitle.contains(partialWindowTitle))
 				break;
 		}
@@ -298,11 +323,20 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 	 */
 	public String takeScreensot(WebDriver driver, String screeenshotName) throws IOException {
 		File source = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-		File destination = new File(".\\target\\Screenshots\\" + screeenshotName + ".png");
+		File destination = new File(System.getProperty("user.dir")+"\\target\\Screenshots\\" + screeenshotName + ".png");
 		FileUtils.copyFile(source, destination);
 		return destination.getAbsolutePath();
 	}
 
+	
+	public String takeScreenShotWhenFailed(WebDriver driver, WebElement webElement ) throws IOException{
+	    Screenshot screenshot = new AShot().coordsProvider(new WebDriverCoordsProvider()).takeScreenshot(driver, webElement);
+	    File dstn=new File(System.getProperty("user.dir") +"\\Images\\googleLogo.png");
+	    ImageIO.write(screenshot.getImage(),"PNG",dstn);
+	    return dstn.getAbsolutePath();
+	}
+	
+	
 	/**
 	 * This method is used for scrolling action based on element.
 	 * 
@@ -312,14 +346,13 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 	public void scrollTillElement(WebDriver driver, WebElement element) {
 		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView();", element);
 	}
-	
-	
+
 	/**
 	 * This method will scroll down for 500 units
+	 * 
 	 * @param driver
 	 */
-	public void scrollAction(WebDriver driver)
-	{
+	public void scrollAction(WebDriver driver) {
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript("window.scrollBy(0,600)", "");
 	}

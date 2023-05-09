@@ -37,7 +37,7 @@ public class BaseClass {
 	public void bcConfig(/*String BROWSER*/) throws IOException
 	{
 		String BROWSER=propertyFileLibrary.readDatafromPropertyFile("browser");//
-		String URL=propertyFileLibrary.readDatafromPropertyFile("url");
+		String URL=propertyFileLibrary.readDatafromPropertyFile("urlapcfms");
 		if(BROWSER.equalsIgnoreCase("chrome"))
 		{
 			ChromeOptions chomeOptions=new ChromeOptions();
@@ -75,7 +75,7 @@ public class BaseClass {
 	@AfterClass
 	public void acConfig()
 	{
-		driver.quit();
+		//driver.quit();
 		Reporter.log("Browser closed Successfully");
 	}
 	
